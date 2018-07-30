@@ -21,9 +21,19 @@ cabal install hlint
 cabal install tasty-hunit
 cabal install sqlite-simple
 
+echo "Configuring postgresql"
 sudo service postgresql start
 echo "Create a postgres user with: sudo -u postgres createuser <username>"
 echo "Create a postgres database with: sudo -u postgres createdb <dbname>"
 echo "Create a postgres password with: $ sudo -u postgres psql"
 echo "psql=# alter user <username> with encrypted password '<password>';"
-echo "Grant postgres priveleges with: psql=# grant all privileges on database <dbname> to <username> ;"
+echo "Grant postgres privileges with: psql=# grant all privileges on database <dbname> to <username> ;"
+echo "Configuring postgres to start on boot"
+sudo update-rc.d postgresql enable
+
+echo "Configuring mysql"
+sudo /etc/init.d/mysql start
+mysql_secure_installation
+echo "Test mysql connection with: mysql -u root -p"
+echo "Configuring mysql to start on boot"
+sudo update-rc.d mysql defaults
