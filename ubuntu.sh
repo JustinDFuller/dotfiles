@@ -20,6 +20,8 @@ cabal update
 cabal install hlint
 cabal install tasty-hunit
 cabal install sqlite-simple
+cabal install mysql-simple
+cabal install postgresql-simple
 
 echo "Configuring postgresql"
 sudo service postgresql start
