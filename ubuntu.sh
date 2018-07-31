@@ -4,10 +4,11 @@ sudo apt-get install git
 sudo apt-get install haskell-platform
 sudo apt-get install node
 sudo apt-get install xclip
-sudo apt-get install mysql-server
 sudo apt-get install postgresql postgresql-contrib
-sudo apt-get install libmysqlclient-dev # linux driver for mysql-simple
-sudo apt-get install libpq-dev # required for mysql and postgres -simple
+sudo apt-get install libpq-dev # required for postgres-simple
+sudo apt-get install mysql-server
+sudo apt-get install libmysqlclient-dev # required for mysql-simple
+sudo apt-get install libpcre3 libpcre3-dev # required for mysql-simple
 
 echo "Generating Github SSH key"
 ssh-keygen -t rsa -b 4096 -C "justindanielfuller@gmail.com"
