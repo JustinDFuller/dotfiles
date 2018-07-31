@@ -7,6 +7,7 @@ sudo apt-get install xclip
 sudo apt-get install mysql-server
 sudo apt-get install postgresql postgresql-contrib
 sudo apt-get install libmysqlclient-dev # linux driver for mysql-simple
+sudo apt-get install libpq-dev # required for mysql and postgres -simple
 
 echo "Generating Github SSH key"
 ssh-keygen -t rsa -b 4096 -C "justindanielfuller@gmail.com"
