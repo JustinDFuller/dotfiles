@@ -1,30 +1,35 @@
-set nocompatible              " be iMproved, required
+set nocompatible
 syntax on
 set nowrap
 set encoding=utf8
-
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize 
-set rtp+=$HOME/.vim/bundle/Vundle.vim/ 
-call vundle#begin('$HOME/.vim/bundle')
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'w0rp/ale'
-Plugin 'itchyny/lightline.vim'
-Plugin 'maximbaz/lightline-ale'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-
 set number
 set ruler
-
 set laststatus=2
 set cursorline
 
-" colorscheme spacegray
+filetype off
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tomasiser/vim-code-dark'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'scrooloose/nerdtree'
+Plugin 'w0rp/ale'
+
+" All of your Plugins must be added before the following line
+call vundle#end()          
+filetype plugin indent on   
+
+colorscheme codedark
+let g:airline_theme = 'codedark'
+
+" Enable Elite mode, No ARRRROWWS!!!!
+let g:elite_mode=1
 
 let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
@@ -34,25 +39,8 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let g:ale_sign_column_always = 1
-let g:ale_linters_explicit = 1
-let g:ale_linters = {'javascript': ['standard']}
-let g:ale_fixers = {'javascript': ['standard']}
+" uncomment below to switch from eslint to standard.. not sure yet how to detect the proper one to use
+" let g:ale_linters_explicit = 1
+" let g:ale_linters = {'javascript': ['standard']}
+" let g:ale_fixers = {'javascript': ['standard']}
 let g:ale_fix_on_save = 1
-
-let g:lightline = {}  
-
-let g:lightline.component_expand = {
-	\  'linter_checking': 'lightline#ale#checking',
-	\  'linter_warnings': 'lightline#ale#warnings',
-	\  'linter_errors': 'lightline#ale#errors',
-	\  'linter_ok': 'lightline#ale#ok',
-\ }
-
-let g:lightline.component_type = {
-      \     'linter_checking': 'left',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
-\ }
-
-let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
