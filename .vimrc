@@ -44,3 +44,11 @@ let g:ale_sign_column_always = 1
 " let g:ale_linters = {'javascript': ['standard']}
 " let g:ale_fixers = {'javascript': ['standard']}
 let g:ale_fix_on_save = 1
+
+" Disable arrow movement, resize splits instead.
+if get(g:, 'elite_mode')
+	nnoremap <Up>    :resize +2<CR>
+	nnoremap <Down>  :resize -2<CR>
+	nnoremap <Left>  :vertical resize +2<CR>
+	nnoremap <Right> :vertical resize -2<CR>
+endif
