@@ -42,3 +42,7 @@ mysql_secure_installation
 echo "Test mysql connection with: mysql -u root -p"
 echo "Configuring mysql to start on boot"
 sudo update-rc.d mysql defaults
+
+# Vim related items
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
