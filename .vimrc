@@ -52,3 +52,9 @@ if get(g:, 'elite_mode')
 	nnoremap <Left>  :vertical resize +2<CR>
 	nnoremap <Right> :vertical resize -2<CR>
 endif
+
+" elm support
+let g:ycm_semantic_triggers = {
+     \ 'elm' : ['.'],
+     \}
+  
