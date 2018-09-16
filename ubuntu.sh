@@ -1,3 +1,6 @@
+# This setup file is intended for an ubuntu system.
+# It should download everything that I use 
+
 sudo apt-get update
 sudo apt-get install firefox
 sudo apt-get install git
@@ -9,6 +12,8 @@ sudo apt-get install libpq-dev # required for postgres-simple
 sudo apt-get install mysql-server
 sudo apt-get install libmysqlclient-dev # required for mysql-simple
 sudo apt-get install libpcre3 libpcre3-dev # required for mysql-simple
+sudo apt-get install build-essential cmake # for youcompleteme
+sudo apt-get install python-dev python3-dev 
 
 echo "Generating Github SSH key"
 ssh-keygen -t rsa -b 4096 -C "justindanielfuller@gmail.com"
@@ -19,6 +24,7 @@ echo "Github SSH Key copied to clipboard"
 echo "Opening github settings page in the default browser"
 xdg-open https://github.com/settings/keys
 
+# Haskell related stuff
 cabal update
 cabal install hlint
 cabal install tasty-hunit
@@ -26,6 +32,7 @@ cabal install sqlite-simple
 cabal install mysql-simple
 cabal install postgresql-simple
 
+# Database setup
 echo "Configuring postgresql"
 sudo service postgresql start
 echo "Create a postgres user with: sudo -u postgres createuser <username>"
@@ -44,11 +51,12 @@ echo "Configuring mysql to start on boot"
 sudo update-rc.d mysql defaults
 
 # Vim related items
+# This will save .vimrc to home directory
+wget https://raw.githubusercontent.com/JustinDFuller/setup/master/.vimrc -O ~/.vimrc
+# Install vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-sudo apt-get install build-essential cmake # for youcompleteme
-sudo apt-get install python-dev python3-dev 
+# This will install all plugins
+vim +PluginInstall +qall
+# Compile youcompleteme
 cd ~/.vim/bundle/YouCompleteMe
 ./install.py --clang-completer
-
-# TODO copy master/.vimrc to the local .vimrc
-vim +PluginInstall +qall
