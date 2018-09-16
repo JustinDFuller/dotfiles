@@ -60,3 +60,4 @@ let g:ycm_semantic_triggers = {
      \ 'elm' : ['.'],
      \}
   
+let NERDTreeShowHidden=1
