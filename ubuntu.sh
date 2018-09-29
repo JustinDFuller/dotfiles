@@ -3,20 +3,22 @@
 # This setup file is intended for an ubuntu system.
 # It should download everything that I use 
 
-sudo apt-get update
-sudo apt-get install vim -y
-sudo apt-get install firefox -y
-sudo apt-get install git -y
-sudo apt-get install haskell-platform -y
-sudo apt-get install node -y
-sudo apt-get install xclip -y
-sudo apt-get install postgresql postgresql-contrib -y
-sudo apt-get install libpq-dev -y # required for postgres-simple
-sudo apt-get install mysql-server -y
-sudo apt-get install libmysqlclient-dev -y # required for mysql-simple
-sudo apt-get install libpcre3 libpcre3-dev -y # required for mysql-simple
-sudo apt-get install build-essential cmake -y # for youcompleteme
-sudo apt-get install python-dev python3-dev -y
+echo "Beginning apt-get installations"
+sudo apt-get update -q
+sudo apt-get install vim -yq
+sudo apt-get install firefox -yq
+sudo apt-get install git -yq
+sudo apt-get install haskell-platform -yq
+sudo apt-get install node -yq
+sudo apt-get install xclip -yq
+sudo apt-get install postgresql postgresql-contrib -yq
+sudo apt-get install libpq-dev -yq # required for postgres-simple
+sudo apt-get install mysql-server -yq
+sudo apt-get install libmysqlclient-dev -yq # required for mysql-simple
+sudo apt-get install libpcre3 libpcre3-dev -yq # required for mysql-simple
+sudo apt-get install build-essential cmake -yq # for youcompleteme
+sudo apt-get install python-dev python3-dev -yq
+echo "Finished with apt-get installations"
 
 echo "Generating Github SSH key"
 ssh-keygen -t rsa -b 4096 -C "justindanielfuller@gmail.com"
