@@ -9,7 +9,6 @@ sudo apt-get install vim -yq
 sudo apt-get install firefox -yq
 sudo apt-get install git -yq
 sudo apt-get install haskell-platform -yq
-sudo apt-get install node -yq
 sudo apt-get install xclip -yq
 sudo apt-get install postgresql postgresql-contrib -yq
 sudo apt-get install libpq-dev -yq # required for postgres-simple
@@ -19,6 +18,13 @@ sudo apt-get install libpcre3 libpcre3-dev -yq # required for mysql-simple
 sudo apt-get install build-essential cmake -yq # for youcompleteme
 sudo apt-get install python-dev python3-dev -yq
 echo "Finished with apt-get installations"
+
+echo "Installing Node Version Manager"
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+nvm install node --latest-npm --reinstall-packages-from=node
+echo "Finished installing nvm, node, and npm"
 
 echo "Generating Github SSH key"
 ssh-keygen -t rsa -b 4096 -C "justindanielfuller@gmail.com"
