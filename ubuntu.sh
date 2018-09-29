@@ -17,6 +17,7 @@ sudo apt-get install libmysqlclient-dev -yq # required for mysql-simple
 sudo apt-get install libpcre3 libpcre3-dev -yq # required for mysql-simple
 sudo apt-get install build-essential cmake -yq # for youcompleteme
 sudo apt-get install python-dev python3-dev -yq
+sudo apt-get install terminator -yq
 echo "Finished with apt-get installations"
 
 echo "Installing Node Version Manager"
