@@ -4,6 +4,7 @@
 # It should download everything that I use 
 
 sudo apt-get update
+sudo apt-get install vim -y
 sudo apt-get install firefox -y
 sudo apt-get install git -y
 sudo apt-get install haskell-platform -y
