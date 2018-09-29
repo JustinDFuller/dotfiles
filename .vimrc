@@ -6,6 +6,10 @@ set number
 set ruler
 set laststatus=2
 set cursorline
+set tabstop=2
+set expandtab
+set shiftwidth=2
+set smarttab
 
 filetype off
 
@@ -23,6 +27,7 @@ Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'elmcast/elm-vim'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'alvan/vim-closetag'
 
 " All of your Plugins must be added before the following line
 call vundle#end()          
@@ -43,9 +48,9 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let g:ale_sign_column_always = 1
 " uncomment below to switch from eslint to standard.. not sure yet how to detect the proper one to use
-" let g:ale_linters_explicit = 1
-" let g:ale_linters = {'javascript': ['standard']}
-" let g:ale_fixers = {'javascript': ['standard']}
+let g:ale_linters_explicit = 1
+let g:ale_linters = {'javascript': ['standard']}
+let g:ale_fixers = {'javascript': ['standard']}
 let g:ale_fix_on_save = 1
 
 " Disable arrow movement, resize splits instead.
