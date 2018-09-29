@@ -1,19 +1,21 @@
+#!/bin/sh
+
 # This setup file is intended for an ubuntu system.
 # It should download everything that I use 
 
 sudo apt-get update
-sudo apt-get install firefox
-sudo apt-get install git
-sudo apt-get install haskell-platform
-sudo apt-get install node
-sudo apt-get install xclip
-sudo apt-get install postgresql postgresql-contrib
-sudo apt-get install libpq-dev # required for postgres-simple
-sudo apt-get install mysql-server
-sudo apt-get install libmysqlclient-dev # required for mysql-simple
-sudo apt-get install libpcre3 libpcre3-dev # required for mysql-simple
-sudo apt-get install build-essential cmake # for youcompleteme
-sudo apt-get install python-dev python3-dev 
+sudo apt-get install firefox -y
+sudo apt-get install git -y
+sudo apt-get install haskell-platform -y
+sudo apt-get install node -y
+sudo apt-get install xclip -y
+sudo apt-get install postgresql postgresql-contrib -y
+sudo apt-get install libpq-dev -y # required for postgres-simple
+sudo apt-get install mysql-server -y
+sudo apt-get install libmysqlclient-dev -y # required for mysql-simple
+sudo apt-get install libpcre3 libpcre3-dev -y # required for mysql-simple
+sudo apt-get install build-essential cmake -y # for youcompleteme
+sudo apt-get install python-dev python3-dev -y
 
 echo "Generating Github SSH key"
 ssh-keygen -t rsa -b 4096 -C "justindanielfuller@gmail.com"
