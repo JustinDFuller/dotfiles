@@ -32,7 +32,7 @@ mkdir ~/.nvm
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 # Install latest node version
-nvm ls-remote | tail -1 | xargs
+nvm install `nvm ls-remote | tail -1 | xargs`
 npm i -g npm@latest
 
 # Getting github key
