@@ -1,7 +1,10 @@
 #!/bin/sh
 
 # This setup file is intended for a MAC OSX system.
-# It should download everything that I use 
+# It should download everything that I use
+
+# Install basic xcode tools
+xcode-select --install
 
 # Install Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -26,6 +29,12 @@ brew install mysql
 brew install nvm
 brew install cmake # For you-complete-me
 brew install wget
+
+# Copy base files from repo
+curl https://raw.githubusercontent.com/JustinDFuller/setup/master/.vimrc > ~/.vimrc
+curl https://raw.githubusercontent.com/JustinDFuller/setup/master/.gitconfig > ~/.gitconfig
+curl https://raw.githubusercontent.com/JustinDFuller/setup/master/.zshrc > ~/.zshrc
+curl https://raw.githubusercontent.com/JustinDFuller/setup/master/.bash_profile > ~/.bash_profile
 
 # Setting up NVM
 mkdir ~/.nvm
@@ -63,7 +72,6 @@ rm VSCode-darwin-insider.zip
 spctl --add /Applications/Visual\ Studio\ Code\ -\ Insiders.app
 
 # Vim
-curl https://raw.githubusercontent.com/JustinDFuller/setup/master/.vimrc > ~/.vimrc
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 (cd ~/.vim/bundle/YouCompleteMe && ./install.py --clang-completer)
