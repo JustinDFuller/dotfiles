@@ -29,6 +29,7 @@ brew install mysql
 brew install nvm
 brew install cmake # For you-complete-me
 brew install wget
+brew install redis
 
 # Copy base files from repo
 curl https://raw.githubusercontent.com/JustinDFuller/setup/master/.vimrc > ~/.vimrc
@@ -64,6 +65,9 @@ cabal install tasty-hunit
 cabal install sqlite-simple
 cabal install mysql-simple
 cabal install postgresql-simple
+
+# Redis
+brew services start redis
 
 # VScode
 curl -O https://az764295.vo.msecnd.net/insider/5f24c93878bd4bc645a4a17c620e2487b11005f9/VSCode-darwin-insider.zip
