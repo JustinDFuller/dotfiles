@@ -36,6 +36,7 @@ brew install nvm
 brew install cmake # For you-complete-me
 brew install wget
 brew install redis
+brew install watchman
 
 # Copy base files from repo
 curl https://raw.githubusercontent.com/JustinDFuller/setup/master/.vimrc > ~/.vimrc
@@ -85,6 +86,9 @@ spctl --add /Applications/Visual\ Studio\ Code\ -\ Insiders.app
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall
 (cd ~/.vim/bundle/YouCompleteMe && ./install.py --clang-completer)
+
+# NPM Globals
+npm install -g yarn expo-cli react-native-cli
 
 # Make the dock have only what I need
 defaults write com.apple.dock persistent-apps -array '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Firefox Nightly.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
