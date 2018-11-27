@@ -37,6 +37,7 @@ brew install cmake # For you-complete-me
 brew install wget
 brew install redis
 brew install watchman
+brew cask install java
 
 # Copy base files from repo
 curl https://raw.githubusercontent.com/JustinDFuller/setup/master/.vimrc > ~/.vimrc
