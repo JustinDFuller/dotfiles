@@ -2,6 +2,7 @@
 
 Automation scripts for:
 * getting started on a new machine
+* AWS set up
 
 I always end up running (And having to figure out) the same commands over and over each time I set up a new machine. So now I'm trying to maintain those commands here so I can run a single file and have my entire dev environment set up.
 
