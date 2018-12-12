@@ -12,5 +12,14 @@ curl -Ls https://raw.github.com/skycocker/chromebrew/master/install.sh | bash
 
 # Crew installs
 crew install nvm
+crew install python3
 
 source ~/.bashrc
+
+# Pip
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py
+
+## Pip Installs
+pip install awscli
+chmod +x /usr/local/bin/aws
