@@ -21,6 +21,11 @@ wget -O - https://raw.githubusercontent.com/JustinDFuller/setup/master/ubuntu.sh
 curl https://raw.githubusercontent.com/JustinDFuller/setup/master/macosx.sh | sudo bash
 ```
 
+### Chromebook
+```
+curl https://raw.githubusercontent.com/JustinDFuller/setup/master/chromebook.sh | sudo bash
+```
+
 ## AWS Set Up
 
 ### Static Site
