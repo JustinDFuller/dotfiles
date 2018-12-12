@@ -13,17 +13,17 @@ Piping to bash can be dangerous. I wrote these scripts, so I trust them. You may
 
 ### Linux
 ```
-wget -O - https://raw.githubusercontent.com/JustinDFuller/setup/master/ubuntu.sh | sudo bash
+wget -O - https://raw.githubusercontent.com/JustinDFuller/setup/master/ubuntu.sh | bash
 ```
 
 ### Mac
 ```
-curl https://raw.githubusercontent.com/JustinDFuller/setup/master/macosx.sh | sudo bash
+curl https://raw.githubusercontent.com/JustinDFuller/setup/master/macosx.sh | bash
 ```
 
 ### Chromebook
 ```
-curl https://raw.githubusercontent.com/JustinDFuller/setup/master/chromebook.sh | sudo bash
+curl https://raw.githubusercontent.com/JustinDFuller/setup/master/chromebook.sh | bash
 ```
 
 ## AWS Set Up
