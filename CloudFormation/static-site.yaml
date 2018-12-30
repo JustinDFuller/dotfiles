@@ -1,0 +1,142 @@
+Parameters:
+  RootDomainName:
+    Type: String
+    Description: The root domain name for our site, e.g. `example.com`
+  OriginAccessIdentityComment:
+    Default: ""
+    Type: String
+    Description: The comment for the OriginAccessIdentity used to connect cloudfront to our S3 bucket
+
+Resources:
+  SiteS3Bucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+      BucketName: !Ref RootDomainName
+
+  SiteBucketPolicy:
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      Bucket: !Ref SiteS3Bucket
+      PolicyDocument:
+        Statement:
+        - Sid: ReadAccess
+          Action: s3:GetObject
+          Effect: Allow
+          Resource: !Sub "${SiteS3Bucket.Arn}/*"
+          Principal:
+              CanonicalUser: !GetAtt CloudFrontOAI.S3CanonicalUserId
+
+  TLSCertificate:
+    Type: "AWS::CertificateManager::Certificate"
+    Properties:
+      DomainName: !Ref RootDomainName
+      SubjectAlternativeNames:
+        - !Join
+          - "."
+          -
+            - "www"
+            - !Ref RootDomainName
+
+  CloudFrontOAI:
+    Type: "AWS::CloudFront::CloudFrontOriginAccessIdentity"
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: !Ref OriginAccessIdentityComment
+
+  SiteCDN:
+    Type: "AWS::CloudFront::Distribution"
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Aliases:
+          - !Ref RootDomainName
+        Origins:
+          - Id: S3Bucket
+            DomainName: !GetAtt
+              - SiteS3Bucket
+              - DomainName
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${CloudFrontOAI}"
+        HttpVersion: "http2"
+        ViewerCertificate:
+          AcmCertificateArn: !Ref TLSCertificate
+          SslSupportMethod: "sni-only"
+        DefaultRootObject: "index.html"
+        DefaultCacheBehavior:
+          TargetOriginId: S3Bucket
+          ViewerProtocolPolicy: "redirect-to-https"
+          MaxTTL: 86400
+          ForwardedValues:
+            QueryString: false
+        CustomErrorResponses:
+          - ErrorCachingMinTTL: 0
+            ErrorCode: 400
+            ResponseCode: 400
+            ResponsePagePath: /error.html
+          - ErrorCachingMinTTL: 0
+            ErrorCode: 403
+            ResponseCode: 403
+            ResponsePagePath: /error.html
+          - ErrorCachingMinTTL: 0
+            ErrorCode: 404
+            ResponseCode: 404
+            ResponsePagePath: /error.html
+          - ErrorCachingMinTTL: 0
+            ErrorCode: 500
+            ResponseCode: 500
+            ResponsePagePath: /error.html
+          - ErrorCachingMinTTL: 0
+            ErrorCode: 503
+            ResponseCode: 503
+            ResponsePagePath: /error.html
+
+  SiteHostedZone:
+    Type: "AWS::Route53::HostedZone"
+    Properties:
+      Name: !Ref RootDomainName
+
+  SiteDNSRecord:
+    Type: "AWS::Route53::RecordSetGroup"
+    Properties:
+      HostedZoneId: !Ref SiteHostedZone
+      RecordSets:
+        - Name: !Ref RootDomainName
+          Type: A
+          AliasTarget:
+            DNSName: !GetAtt
+              - SiteCDN
+              - DomainName
+            HostedZoneId: Z2FDTNDATAQYW2
+        - Name: !Join
+            - "."
+            -
+              - "www"
+              - !Ref RootDomainName
+          Type: CNAME
+          TTL: 600
+          ResourceRecords:
+            - !Ref RootDomainName
+
+Outputs:
+  WebsiteURL:
+    Description: URL for the website
+    Value: !Join
+      - ""
+      -
+        - "https://"
+        - !Ref RootDomainName
+
+  NameServers:
+    Description: DNS NameServers for the site
+    Value: !Join
+      - ", "
+      - !GetAtt
+        - SiteHostedZone
+        - NameServers
+
+  CloudFrontDistributionId:
+    Description: The CloudFront Distribution Id to be used for creating invalidations during deployment
+    Value: !Ref SiteCDN
