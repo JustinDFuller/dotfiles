@@ -2,6 +2,12 @@ Parameters:
   RootDomainName:
     Type: String
     Description: The root domain name for our site, e.g. `example.com`
+  GithubUser:
+    Type: String
+    Description: The github user to retrieve the source repository from.
+  GithubRepo:
+    Type: String
+    Description: The github repository to retrieve the source from.
   OriginAccessIdentityComment:
     Default: ""
     Type: String
@@ -15,6 +21,46 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: error.html
       BucketName: !Ref RootDomainName
+
+  SiteContinuousBuild:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: !Ref RootDomainName
+      BadgeEnabled: true
+      Description: !Join 
+        - " "
+        -
+          - Site continuous build for 
+          - !Ref RootDomainName
+      Environment:
+        ComputeType: BUILD_GENERAL1_SMALL
+        PrivilegedMode: false
+        Image: aws/codebuild/nodejs:10.1.0
+        Type: LINUX_CONTAINER
+        EnvironmentVariables: []
+      Artifacts:
+        Packaging: NONE
+        Name: !Ref RootDomainName
+        NamespaceType: NONE
+        Location: !Ref RootDomainName
+        Path: ''
+        Type: S3
+        EncryptionDisabled: true
+      Source:
+        GitCloneDepth: 1
+        Type: GITHUB
+        Location: !Join
+          - ""
+          -
+            - https://github.com/
+            - !Ref GithubUser
+            - /
+            - !Ref GithubRepo
+            - .git
+        InsecureSsl: false
+      Triggers:
+        Webhook: true
+      TimeoutInMinutes: 5
 
   SiteBucketPolicy:
     Type: "AWS::S3::BucketPolicy"
