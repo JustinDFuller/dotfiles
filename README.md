@@ -32,8 +32,8 @@ curl https://raw.githubusercontent.com/JustinDFuller/setup/master/chromebook.sh 
 
 A static site, hosted in S3, served with CloudFront, DNS by Route 53, SSL certificate through ACM, continuous integration with CodeBuild.
 
-You must have the AWS CLI installed.
+You must have the AWS CLI installed and configured with `aws configure`.
 
 ```
-aws cloudformation deploy --stack-name "" --template-file CloudFormation/static-site.json --parameter-overrides "RootDomainName=" "OriginAccessIdentityComment=" "GithubUser=" "GithubRepo="
+aws cloudformation deploy --stack-name "" --template-body file://CloudFormation/static-site.json --parameter-overrides "RootDomainName=" "OriginAccessIdentityComment=" "GithubUser=" "GithubRepo="
 ```
