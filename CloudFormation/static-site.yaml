@@ -21,11 +21,22 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: error.html
       BucketName: !Ref RootDomainName
+      
+  ContinuousBuildServiceRole:
+    Type: 'AWS::IAM::ServiceLinkedRole'
+    Properties:
+      AWSServiceName: codebuild.amazonaws.com
+      Description: !Join
+      - " "
+      -
+        - The service role that provides continuous integration for
+        - !Ref RootDomainName
 
   SiteContinuousBuild:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: !Ref RootDomainName
+      ServiceRole: !Ref ContinuousBuildServiceRole
       BadgeEnabled: true
       Description: !Join 
         - " "
