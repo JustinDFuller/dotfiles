@@ -64,7 +64,7 @@ Resources:
   SiteContinuousBuild:
     Type: AWS::CodeBuild::Project
     Properties:
-      Name: !Ref RootDomainName
+      Name: !Select [0, !Split [".", !Ref RootDomainName]]
       ServiceRole: !Ref ContinuousBuildServiceRole
       BadgeEnabled: true
       Description: !Join 
