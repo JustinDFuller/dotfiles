@@ -11,7 +11,11 @@ Parameters:
   OriginAccessIdentityComment:
     Default: ""
     Type: String
-    Description: The comment for the OriginAccessIdentity used to connect cloudfront to our S3 bucket
+    Description: The comment for the OriginAccessIdentity used to connect cloudfront to our S3 bucket.
+  GithubAuthToken
+    Default: ""
+    Type: String
+    Description: The OAUTH token used by CodeBuild to sign in to github.
 
 Resources:
   SiteS3Bucket:
@@ -87,6 +91,9 @@ Resources:
         Type: S3
         EncryptionDisabled: true
       Source:
+        Auth:
+          Type: OAUTH
+          Resource: !Ref GithubAuthToken
         GitCloneDepth: 1
         Type: GITHUB
         Location: !Join
