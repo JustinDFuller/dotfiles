@@ -35,5 +35,5 @@ A static site, hosted in S3, served with CloudFront, DNS by Route 53, SSL certif
 You must have the AWS CLI installed and configured with `aws configure`.
 
 ```
-aws cloudformation deploy --stack-name "" --template-body file://CloudFormation/static-site.yaml --parameter-overrides "RootDomainName=" "OriginAccessIdentityComment=" "GithubUser=" "GithubRepo=" --capabilities "CAPABILITY_IAM"
+aws cloudformation update-stack --stack-name "" --template-body file://CloudFormation/static-site.yaml --parameters "ParameterKey=RootDomainName,ParameterValue=" "ParameterKey=OriginAccessIdentityComment,ParameterValue=" "ParameterKey=GithubUser,ParameterValue=" "ParameterKey=GithubRepo,ParameterValue=" --capabilities "CAPABILITY_IAM"
 ```
