@@ -12,7 +12,7 @@ Parameters:
     Default: ""
     Type: String
     Description: The comment for the OriginAccessIdentity used to connect cloudfront to our S3 bucket.
-  GithubAuthToken
+  GithubAuthToken:
     Default: ""
     Type: String
     Description: The OAUTH token used by CodeBuild to sign in to github.
@@ -26,6 +26,19 @@ Resources:
         ErrorDocument: error.html
       BucketName: !Ref RootDomainName
       
+  WwwS3Bucket:
+      Type: 'AWS:S3:Bucket'
+      Properties:
+        WebsiteConfiguration:
+          RedirectAllRequestsTo:
+            HostName: !GetAtt
+              - SiteS3Bucket
+              - DomainName 
+        BucketName: !Join
+          - ''
+          - 'www.'
+          - !Ref RootDomainName
+
   ContinuousBuildServiceRole:
     Type: 'AWS::IAM::Role'
     Properties:
@@ -57,8 +70,7 @@ Resources:
           - Sid: S3GetObjectPolicy
             Effect: Allow
             Action: 
-            - 's3:GetObject'
-            - 's3:GetObjectVersion'
+            - 's3:*'
             Resource: '*'
           - Sid: S3PutObjectPolicy
             Effect: 'Allow'
@@ -69,7 +81,7 @@ Resources:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: !Select [0, !Split [".", !Ref RootDomainName]]
-      ServiceRole: !Ref ContinuousBuildServiceRole
+      ServiceRole: !GetAtt ContinuousBuildServiceRole.Arn
       BadgeEnabled: true
       Description: !Join 
         - " "
