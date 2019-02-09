@@ -21,6 +21,7 @@ sudo apt-get install wget -yq
 echo "Finished with apt-get installations"
 
 echo "Installing Node Version Manager"
+mkdir -p ~/.nvm ~/nvm # I've seen it install nvm in both these folders. Ensure they exist.
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
