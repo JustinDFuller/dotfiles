@@ -25,7 +25,7 @@ mkdir -p ~/.nvm ~/nvm # I've seen it install nvm in both these folders. Ensure t
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-nvm install node --latest-npm --reinstall-packages-from=node
+nvm install node --latest-npm
 echo "Finished installing nvm, node, and npm"
 
 echo "Generating Github SSH key"
