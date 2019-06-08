@@ -66,6 +66,16 @@ mysql_secure_installation
 # Setting up postgresql
 brew services start postgresql
 
+# pgAdmin
+echo "Installing PG Admin 4"
+curl -sO https://ftp.postgresql.org/pub/pgadmin/pgadmin4/v4.8/macos/pgadmin4-4.8.dmg
+eho "Enter your password to mount pgAdmin 4"
+sudo hdiutil attach pgadmin4-4.8.dmg
+cp -R /Volumes/pgAdmin\ 4/pgAdmin\ 4.app /Applications
+echo "Enter your password do unmount pgAdmin 4"
+sudo hdiutil detach /Volumes/pgAdmin\ 4/
+rm -rf pgadmin4-4.8.dmg
+
 # Haskell related stuff
 cabal update
 cabal install hlint
@@ -92,8 +102,13 @@ vim +PluginInstall +qall
 npm install -g yarn expo-cli react-native-cli
 
 # Make the dock have only what I need
+# Firefox Nightly
 defaults write com.apple.dock persistent-apps -array '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Firefox Nightly.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+# Visual Studio
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Visual Studio Code - Insiders.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+# Iterm
 defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Iterm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+# PG Admin
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/pgAdmin\ 4.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 defaults write com.apple.dock tilesize -int 32
 killall Dock
