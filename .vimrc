@@ -10,6 +10,7 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 set smarttab
+set directory^=$HOME/.vim/tmp// " All swp files go to a temporary directory
 
 filetype off
 
