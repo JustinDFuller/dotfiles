@@ -50,8 +50,8 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 let g:ale_sign_column_always = 1
 " uncomment below to switch from eslint to standard.. not sure yet how to detect the proper one to use
 let g:ale_linters_explicit = 1
-let g:ale_linters = {'javascript': ['standard']}
-let g:ale_fixers = {'javascript': ['standard']}
+let g:ale_linters = {'javascript': ['prettier-standard', 'standard', 'eslint']}
+let g:ale_fixers = {'javascript': ['prettier-standard', 'standard', 'eslint']}
 let g:ale_fix_on_save = 1
 
 " Disable arrow movement, resize splits instead.
