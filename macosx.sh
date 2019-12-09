@@ -36,7 +36,10 @@ brew install nvm
 brew install cmake # For you-complete-me
 brew install wget
 brew install redis
+brew install starship
 brew install watchman
+brew tap homebrew/cask-fonts
+brew cask install font-fira-code
 brew cask install java
 
 # Copy base files from repo
