@@ -1,4 +1,4 @@
-# Automation
+<img src="https://repository-images.githubusercontent.com/142769624/e8c127a4-7f3c-43dc-898e-150969a2ea24" />
 
 Automation scripts for:
 * getting started on a new machine
