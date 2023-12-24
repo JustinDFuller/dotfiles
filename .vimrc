@@ -11,8 +11,12 @@ set expandtab
 set shiftwidth=2
 set smarttab
 set directory^=$HOME/.vim/tmp// " All swp files go to a temporary directory
+set autochdir
 
 filetype off
+
+" Stay in current dir
+autocmd BufEnter * silent! lcd %:p:h
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -20,36 +24,21 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tomasiser/vim-code-dark'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
-Plugin 'w0rp/ale'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'elmcast/elm-vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'alvan/vim-closetag'
+Plugin 'fatih/vim-go'
+Plugin 'w0rp/ale'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'neoclide/jsonc.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()          
 filetype plugin indent on   
 
-colorscheme codedark
-let g:airline_theme = 'codedark'
-
-let g:javascript_plugin_jsdoc = 1
-let g:jsx_ext_required = 0
-
 " open up nerdtree automatically when vim starts up on opening a directory
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-let g:ale_sign_column_always = 1
-" uncomment below to switch from eslint to standard.. not sure yet how to detect the proper one to use
-let g:ale_linters_explicit = 1
-let g:ale_linters = {'javascript': ['eslint', 'prettier']}
-let g:ale_fixers = {'javascript': ['eslint', 'prettier']}
-let g:ale_fix_on_save = 1
 
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
